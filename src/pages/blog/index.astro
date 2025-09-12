@@ -10,6 +10,15 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const getPostHref = (post: any) => {
+	// приоритет: externalUrl → modalUrl → внутренний slug/id
+	if (post?.data?.externalUrl) return post.data.externalUrl;
+	if (post?.data?.modalUrl) return post.data.modalUrl;
+
+	const slug = (post?.data?.slug ?? post.id).toString().trim().replace(/^\/+|\/+$/g, '');
+	return `/blog/${slug}/`;
+}
 ---
 
 <!doctype html>
@@ -94,7 +103,7 @@ const posts = (await getCollection('blog')).sort(
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={getPostHref(post)}>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage} alt="" />
 									)}
