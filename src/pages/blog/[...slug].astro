@@ -4,8 +4,14 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
+	const internalPosts = posts.filter(
+		(p) => !p.data?.externalUrl && !p.data?.modalUrl
+	);
+
+	const normalize = (s: string) => String(s ?? '').trim().replace(/^\/+|\/+$/g, '');
+	
+	return internalPosts.map((post) => ({
+		params: { slug: normalize(post.id ?? post?.data?.slug) },
 		props: post,
 	}));
 }
