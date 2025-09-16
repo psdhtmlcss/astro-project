@@ -1,9 +1,23 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const excludesPatterns = [
+	'**/[!_]*.{md,mdx}',      // Файлы с одинарным подчеркиванием
+	'**/[!__]*.{md,mdx}',     // Файлы с двойным подчеркиванием
+];
+
+const excludesPaths = [
+	'**/_*',      // Папки с одинарным подчеркиванием
+	'**/__*',     // Папки с двойным подчеркиванием
+];
+
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ 
+		base: './src/content/blog',
+		pattern: excludesPatterns,
+		exclude: excludesPaths
+	} as any),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) =>
 		z.object({
@@ -22,7 +36,11 @@ const blog = defineCollection({
 // Коллекция для новостей
 const news = defineCollection({
 	// Загружаем Markdown и MDX файлы из папки `src/content/news/`
-	loader: glob({ base: './src/content/news', pattern: '**/*.{md,mdx}' }),
+	loader: glob({
+		base: './src/content/news',
+		pattern: excludesPatterns,
+		exclude: excludesPaths
+	} as any),
 	// Схема для проверки frontmatter новостей
 	schema: ({ image }) =>
 		z.object({

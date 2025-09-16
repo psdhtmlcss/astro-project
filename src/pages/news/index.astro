@@ -6,6 +6,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { getCollection } from 'astro:content';
 
 const news = await getCollection('news');
+
+console.log('Загруженные новости:', news.map(n => n.id));
 ---
 
 <!doctype html>

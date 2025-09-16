@@ -19,6 +19,8 @@ const getPostHref = (post: any) => {
 	const slug = (post?.data?.slug ?? post.id).toString().trim().replace(/^\/+|\/+$/g, '');
 	return `/blog/${slug}/`;
 }
+
+console.log('Загруженные новости:', posts.map(n => n.id));
 ---
 
 <!doctype html>
