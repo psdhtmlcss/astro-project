@@ -19,4 +19,24 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+// Коллекция для новостей
+const news = defineCollection({
+	// Загружаем Markdown и MDX файлы из папки `src/content/news/`
+	loader: glob({ base: './src/content/news', pattern: '**/*.{md,mdx}' }),
+	// Схема для проверки frontmatter новостей
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			// Преобразуем строку в объект Date
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			heroImage: image().optional(),
+			// Дополнительные поля для новостей (если нужны)
+			category: z.string().optional(),
+			author: z.string().optional(),
+			slug: z.string().optional()
+		}),
+});
+
+export const collections = { blog, news };
