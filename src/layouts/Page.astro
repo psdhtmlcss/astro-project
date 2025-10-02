@@ -1,0 +1,21 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Navigation from '@/components/Navigation/Navigation.astro';
+import "@/styles/global.css";
+
+const { title } = Astro.props;
+---
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <BaseHead title={title}/>
+  </head>
+  <body>
+    <Navigation />
+    <main class="p-8">
+      <h1 class="text-3xl font-bold">{title}</h1>
+      <slot /> <!--  Ваше содержимое вставляется сюда -->
+    </main>
+  </body>
+</html>
