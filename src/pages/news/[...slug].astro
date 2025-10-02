@@ -1,0 +1,28 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+// Используем алиас @ из astro.config.mjs
+import PageLayout from '@/layouts/Page.astro';
+
+// Тип Props должен соответствовать структуре объекта, который мы возвращаем в getStaticPaths
+type Props = {
+  post: CollectionEntry<'news'>;
+};
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map(post => ({
+    // Параметр должен быть 'slug', чтобы соответствовать названию файла [...slug].astro
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+// Деструктурируем post из Astro.props
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PageLayout>
+	<h1>{post.data.title}</h1>
+	<Content />
+</PageLayout>
