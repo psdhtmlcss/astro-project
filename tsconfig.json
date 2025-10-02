@@ -5,8 +5,9 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "baseUrl": ".",
+    // Алиасы должны совпадать с astro.config.mjs для согласованности
     "paths": {
-      "@src/*": ["src/*"],
+      "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
