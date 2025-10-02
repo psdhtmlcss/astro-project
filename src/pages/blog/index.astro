@@ -8,8 +8,6 @@ import PageLayout from '@/layouts/Page.astro';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-console.log('Загруженные посты:', posts.map(n => n.id));
 ---
 
 <PageLayout title="Posts">

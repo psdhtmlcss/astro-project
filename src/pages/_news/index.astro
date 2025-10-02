@@ -5,21 +5,18 @@ import { getCollection } from 'astro:content';
 // Используем алиасы из astro.config.mjs для согласованности
 import PageLayout from '@/layouts/Page.astro';
 
-const news = (await getCollection('news')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const news = await getCollection('news');
 ---
 
 <PageLayout title="News">
 	<section>
 		<ul>
 			{
-				news.map((news) => (
+				news.map((item) => (
 					<li>
-						<a href={`/news/${news.id}`}>
+						<a href={`/news/${item.id}`}>
 							
-							<h4 class="title">{news.data.title}</h4>
-							<p>{news.data.pubDate}</p>
+							<h4 class="title">{item.data.title}</h4>
 						</a>
 					</li>
 				))

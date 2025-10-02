@@ -17,8 +17,6 @@ export async function getStaticPaths() {
   }));
 }
 
-console.log('Загруженные посты:', news.map(n => n.id));
-
 // Деструктурируем post из Astro.props
 const { post } = Astro.props;
 console.log('post: ', post);
