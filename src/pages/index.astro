@@ -1,29 +1,10 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import PageLaout from '@/layouts/Page.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Некоторые ключевые моменты</h1>
-			<blockquote>
-				Веб-сайт Astro может загружаться на 40% быстрее и использовать на 90% меньше JavaScript чем такой же сайт, построенный на самом популярном веб-фреймворке React. Но не верьте нам на слово: посмотрите, как производительность Astro заставила Райана Карниато (создателя Solid.js и Marko) потерять дар речи :)
-				<footer><a href="https://docs.astro.build/ru/concepts/why-astro/">https://docs.astro.build/ru/concepts/why-astro/</a></footer>
-			</blockquote>
-			<blockquote>
-				<p>Astro был разработан, чтобы быть менее сложным, чем другие фреймворки и языки пользовательского интерфейса. Одной из главных причин этого является то, что Astro был разработан для рендеринга на сервере, а не в браузере. Это значит, что вам не нужно переживать о: хуках (React), нестабильных замыканиях (также React), ссылках (Vue), наблюдаемых (Svelte), атомах, селекторах, реакциях или производных. На сервере нет реактивности, поэтому вся эта сложность исчезает.</p>
-				<footer><a href="https://docs.astro.build/ru/concepts/why-astro/">https://docs.astro.build/ru/concepts/why-astro/</a></footer>
-			</blockquote>
-			
-		</main>
-		<Footer />
-	</body>
-</html>
+<PageLaout title="Welcome!">
+	<p>This is index page.</p>
+</PageLaout>
+
